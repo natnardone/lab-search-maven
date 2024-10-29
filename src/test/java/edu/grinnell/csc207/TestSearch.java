@@ -14,8 +14,8 @@ import edu.grinnell.csc207.util.SearchUtils;
 /**
  * Tests of our search methods.
  *
- * @author Your Name Here
- * @author Your Name Here
+ * @author Alex Cyphers
+ * @author Natalie Nardone
  * @author Samuel A. Rebelsky
  */
 public class TestSearch {
@@ -103,5 +103,27 @@ public class TestSearch {
     assertBinarySearchFails(new int[] { 7, 11 }, 10);
     assertBinarySearchFails(new int[] { 7, 11 }, 20);
   } // testBinarySearchTwo()
+
+  /**
+   * Searching in an array of even length.
+   */
+  @Test
+  void testBinarySearchEven() throws Exception {
+    assertBinarySearchFinds(2, new int[] { 0, 2, 4, 6}, 4);
+    assertBinarySearchFinds(3, new int[] { 0, 2, 4, 6}, 6);
+    assertBinarySearchFails(new int[] { 0, 2, 4, 6}, 1);
+  }
+
+
+  /**
+   * Searching in an array of odd length.
+   */
+  @Test
+  void testBinarySearchdd() throws Exception {
+    assertBinarySearchFinds(2, new int[] { 1, 2, 3, 4, 5}, 3);
+    assertBinarySearchFinds(1, new int[] { 1, 2, 3, 4, 5}, 2);
+    assertBinarySearchFinds(3, new int[] { 1, 2, 3, 4, 5}, 4);
+    assertBinarySearchFails(new int[] {1, 2, 3, 4, 5}, 0);
+  }
 
 } // class TestSearch
