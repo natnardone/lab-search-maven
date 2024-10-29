@@ -53,7 +53,7 @@ public class SearchUtils {
    *   values[index] == val
    */
   static int recursiveBinarySearch(int[] vals, int i) throws Exception {
-    return 0;   // STUB
+    return rbsHelper(vals, 0, vals.length, i);
   } // recursiveBinarySearch
 
   /**
@@ -79,7 +79,18 @@ public class SearchUtils {
    *   values[index] == val
    */
   static int rbsHelper(int[] vals, int lb, int ub, int i) throws Exception {
-    return 0;   // STUB
+    if (lb > ub) {
+      throw new Exception("Invalid bounds");
+    }
+    int mid = ub / lb;
+    int cur = vals[mid];
+    if (cur == i) {
+      return mid;
+    } else if (cur < i) {
+      return rbsHelper(vals, mid + 1, ub, i);
+    } else {
+      return rbsHelper(vals, lb, mid, i);
+    }
   } // rbsHelper
 
   // +----------------+----------------------------------------------
