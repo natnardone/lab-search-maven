@@ -80,16 +80,16 @@ public class SearchUtils {
    */
   static int rbsHelper(int[] vals, int lb, int ub, int i) throws Exception {
     if (lb > ub) {
-      throw new Exception("Invalid bounds");
+      throw new Exception("Invalid bounds: " + lb + ", " + ub);
     }
-    int mid = ub / lb;
+    int mid = lb + (ub - lb) / 2;
     int cur = vals[mid];
     if (cur == i) {
       return mid;
     } else if (cur < i) {
       return rbsHelper(vals, mid + 1, ub, i);
     } else {
-      return rbsHelper(vals, lb, mid, i);
+      return rbsHelper(vals, lb, mid - 1, i);
     }
   } // rbsHelper
 
@@ -142,9 +142,9 @@ public class SearchUtils {
    *   values[index] == val
    */
   public static int binarySearch(int[] vals, int i) throws Exception {
-    return 0;
+    //return 0;
     // return interativeBinarySearch(vals, i);
-    // return recursiveBinarySearch(vals, i);
+    return recursiveBinarySearch(vals, i);
   } // binarySearch
 
 } // class SearchUtils
