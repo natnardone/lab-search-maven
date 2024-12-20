@@ -38,9 +38,9 @@ public class SearchUtils {
   /**
    * Search for val in values, return the index of an instance of val.
    *
-   * @param values
+   * @param vals
    *   A sorted array of integers
-   * @param val
+   * @param i
    *   An integer we're searching for
    * @return
    *   index, an index of val (if one exists)
@@ -60,13 +60,13 @@ public class SearchUtils {
    * Search for val in a subarray of values, return the index of an 
    * instance of val.
    *
-   * @param values
+   * @param vals
    *   A sorted array of integers
    * @param lb
    *   The lower bound of the area of interest (inclusive)
    * @param ub
    *   The upper bound of the area of interest (exclusive)
-   * @param val
+   * @param i
    *   An integer we're searching for
    * @return
    *   index, an index of val (if one exists)
@@ -79,18 +79,25 @@ public class SearchUtils {
    *   values[index] == val
    */
   static int rbsHelper(int[] vals, int lb, int ub, int i) throws Exception {
-    if (lb > ub) {
-      throw new Exception("Invalid bounds: " + lb + ", " + ub);
+    while (ub >= lb) {
+      int mid = lb + (ub - lb) / 2;
+      if (mid >= vals.length) {
+        throw new Exception("Value not found in array.");
+      }
+      int cur = vals[mid];
+      if (cur == i) {
+        return mid;
+      } else if (cur < i) {
+        return rbsHelper(vals, mid + 1, ub, i);
+      } else {
+        if (lb != mid) {
+          return rbsHelper(vals, lb, mid, i);
+        } else {
+          throw new Exception("Value not found in array.");
+        }
+      }
     }
-    int mid = lb + (ub - lb) / 2;
-    int cur = vals[mid];
-    if (cur == i) {
-      return mid;
-    } else if (cur < i) {
-      return rbsHelper(vals, mid + 1, ub, i);
-    } else {
-      return rbsHelper(vals, lb, mid - 1, i);
-    }
+    throw new Exception("Value not found in array.");
   } // rbsHelper
 
   // +----------------+----------------------------------------------
